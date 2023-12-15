@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+
+<main>
+    <h1>
+        Insert New Client
+    </h1>
+    <form class="upsert-form" method="post" th:action="@{/account/clientRegister}" th:object="${dto}">
+        <input type="hidden" th:field="*{role}">
+        <input type="hidden" th:field="*{password}">
+        <input type="hidden" th:field="*{confirmPassword}">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <label>Username</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{username}">
+                    <div class="field-validation-error" th:errors="*{username}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Full Name</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{name}">
+                    <div class="field-validation-error" th:errors="*{name}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Birth Date</label>
+                </td>
+                <td>
+                    <input type="date" th:field="*{birthDate}">
+                    <div class="field-validation-error" th:errors="*{birthDate}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Company</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{company}">
+                    <div class="field-validation-error" th:errors="*{company}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Save</button>
+    </form>
+</main>
+</body>
+</html>

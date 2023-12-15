@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+<main>
+    <h1>
+        Employee List
+    </h1>
+    <div class="grid-container">
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Birth Date</th>
+                <th>Position</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="row : ${grid}" th:object="${row}">
+                <td>
+                    <a th:href="@{/employee/logList(username=*{username})}" class="blue-button">Show Log</a>
+                </td>
+                <td th:text="*{username}"></td>
+                <td th:text="*{name}"></td>
+                <td th:text="*{birthDate}"></td>
+                <td th:text="*{position}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="5">
+                    <div class="pagination">
+                        <div th:text="|Page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages != 0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}" th:href="@{/employee/list(page=${number})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+
+<main>
+    <h1>
+        Edit Profile
+    </h1>
+    <form class="upsert-form" method="post" th:action="@{/profile/edit}" th:object="${dto}">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <label>Name</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{name}">
+                    <div class="field-validation-error" th:errors="*{name}"></div>
+                    <div class="field-validation-error" th:errors="${dto}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Birth Date</label>
+                </td>
+                <td>
+                    <input type="date" th:field="*{birthDate}">
+                    <div class="field-validation-error" th:errors="*{birthDate}"></div>
+                    <div class="field-validation-error" th:errors="${dto}"></div>
+                </td>
+            </tr>
+            <tr th:unless="${#strings.contains(#authentication.getAuthorities, 'Client')}">
+                <td>
+                    <label>Position</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{position}">
+                    <div class="field-validation-error" th:errors="*{position}"></div>
+                    <div class="field-validation-error" th:errors="${dto}"></div>
+                </td>
+            </tr>
+            <tr th:if="${#strings.contains(#authentication.getAuthorities, 'Client')}">
+                <td>
+                    <label>Company</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{company}">
+                    <div class="field-validation-error" th:errors="*{company}"></div>
+                    <div class="field-validation-error" th:errors="${dto}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Save</button>
+        <a class="blue-button" th:href="@{/profile/profile}">Back</a>
+    </form>
+</main>
+</body>
+</html>

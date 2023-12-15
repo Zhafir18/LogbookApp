@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+
+<main>
+    <h1>
+        Create New Log
+    </h1>
+    <form class="upsert-form" method="post" th:action="@{/employee/insertLog}" th:object="${dto}">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{username}">
+        <input type="hidden" th:field="*{clientApproval}">
+        <input type="hidden" th:field="*{hrdApproval}">
+        <input type="hidden" th:field="*{period}">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <label>Client</label>
+                </td>
+                <td>
+                    <select th:field="*{clientUsername}">
+                        <option th:value="null">Select Client....</option>
+                        <option th:each="option : ${clientDropdown}" th:value="${option.value}" th:text="${option.textContent}">
+                        </option>
+                    </select>
+                    <div class="field-validation-error" th:errors="*{clientUsername}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>HRD</label>
+                </td>
+                <td>
+                    <select th:field="*{hrdUsername}">
+                        <option th:value="null">Select HRD....</option>
+                        <option th:each="option : ${hrdDropdown}" th:value="${option.value}" th:text="${option.textContent}">
+                        </option>
+                    </select>
+                    <div class="field-validation-error" th:errors="*{hrdUsername}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Save</button>
+    </form>
+</main>
+</body>
+</html>

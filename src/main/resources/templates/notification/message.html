@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+<main>
+  <h1>
+    Notification List
+  </h1>
+  <div class="grid-container notif-table">
+    <a th:if="${!total}" class="blue-button" th:href="@{/notification/readAll}">Read All</a>
+    <p th:if="${total}">No Notification Found!</p>
+    <table th:each="row : ${grid}" th:object="${row}">
+      <tbody>
+      <tr th:if="*{isRead == False}" style="background-color: red; color: white;">
+        <td th:text="*{dateTimeFormat}"></td>
+        <td th:text="*{message}"></td>
+        <td>
+          <a class="blue-button" th:if="*{isRead == False}" th:href="@{/notification/readOne(id=*{id})}">Read</a>
+        </td>
+      </tr>
+      <tr th:if="*{isRead == True}">
+        <td th:text="*{dateTimeFormat}"></td>
+        <td th:text="*{message}"></td>
+        <td>
+          <a class="blue-button" th:if="*{isRead == False}" th:href="@{/notification/readOne(id=*{id})}">Read</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+</body>
+</html>

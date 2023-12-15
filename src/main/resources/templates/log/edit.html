@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+
+<main>
+    <h1>
+        Log Form
+    </h1>
+    <form class="upsert-form" method="post" th:action="@{/log/edit}" th:object="${dto}">
+        <input type="hidden" th:field="*{id}">
+        <input type="hidden" th:field="*{username}">
+        <input type="hidden" th:field="*{clientApproval}">
+        <input type="hidden" th:field="*{hrdApproval}">
+        <input type="hidden" th:field="*{clientUsername}">
+        <input type="hidden" th:field="*{hrdUsername}">
+        <input type="hidden" th:field="*{submissionDate}">
+        <input type="hidden" th:field="*{logDate}">
+        <table>
+            <tbody>
+            <tr>
+                <td>
+                    <label>Note</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{note}">
+                    <div class="field-validation-error" th:errors="*{note}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Activity</label>
+                </td>
+                <td>
+                    <input type="text" th:field="*{activity}">
+                    <div class="field-validation-error" th:errors="*{activity}"></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <button type="submit" class="blue-button">Save</button>
+    </form>
+</main>
+</body>
+</html>

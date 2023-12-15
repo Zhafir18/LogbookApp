@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+<main>
+    <h1>
+        Employee Log Book List
+    </h1>
+    <div class="grid-container">
+        <a class="blue-button" th:href="@{/client/employee}">Back</a>
+        <form class="filter" th:action="@{/client/log}" METHOD="get">
+            <input type="hidden" name="username" th:value="${username}">
+            <label>Select Month</label>
+            <select name="logMonth">
+                <option th:value="null">Select Month....</option>
+                <option th:each="option : ${monthDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == logMonth}">
+                </option>
+            </select>
+            <label>Select Year</label>
+            <select name="logYear">
+                <option th:value="null">Select Year....</option>
+                <option th:each="option : ${yearDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == logYear}">
+                </option>
+            </select>
+            <label>Client Approval</label>
+            <select name="clientApproval">
+                <option th:each="option : ${clientApprovalDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == clientApproval}">
+                </option>
+            </select>
+            <button type="submit" class="blue-button">
+                Search
+            </button>
+        </form>
+        <a th:if="${!clientApproval}" class="blue-button create-button" th:href="@{/client/approveAll}">Approve All</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Log Date</th>
+                <th>Client Approval Status</th>
+                <th>Client Approval Date</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="row : ${grid}" th:object="${row}">
+                <td>
+                    <a th:if="*{!clientApproval and note != null and activity != null}" class="blue-button" th:href="@{/client/approve(id=*{id})}">Approve</a>
+                    <a href="javascript:;" class="blue-button detail-button" th:attr="data-id=*{id}">Detail</a>
+                </td>
+                <td th:text="*{logDate}"></td>
+                <td th:text="*{clientApproval ? 'Approved' : 'Pending'}"></td>
+                <td th:text="*{clientApprovalDate}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    <div class="pagination">
+                        <div th:text="|Page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages != 0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}" th:href="@{/client/log(page=${number}, username=${username}, logMonth=${logMonth}, logYear=${logYear}, clientApproval=${clientApproval})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<div class="modal-layer">
+    <th:block th:replace="~{/log/log-detail :: detail-dialog}"></th:block>
+</div>
+<script th:src="@{/resources/js/popup/popup.js}"></script>
+</body>
+</html>

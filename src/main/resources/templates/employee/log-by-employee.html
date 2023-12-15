@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+<main>
+    <h1>
+        Employee Log Book
+    </h1>
+    <a class="blue-button" th:href="@{/employee/list}">Back</a>
+    <div class="grid-container">
+        <form class="filter" th:action="@{/employee/logList}" METHOD="get">
+            <input type="hidden" name="username" th:value="${username}">
+            <label for="submissionMonth">Select Month</label>
+            <select id="submissionMonth" name="submissionMonth">
+                <option th:value="null">Select Month....</option>
+                <option th:each="option : ${monthDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == submissionMonth}">
+                </option>
+            </select>
+            <label>Select Year</label>
+            <select name="submissionYear">
+                <option th:value="null">Select Year....</option>
+                <option th:each="option : ${yearDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == submissionYear}">
+                </option>
+            </select>
+            <label>Client Approval</label>
+            <select name="clientApproval">
+                <option th:each="option : ${clientApprovalDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == clientApproval}">
+                </option>
+            </select>
+            <label>HRD Approval</label>
+            <select name="hrdApproval">
+                <option th:each="option : ${hrdApprovalDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == hrdApproval}">
+                </option>
+            </select>
+            <button type="submit" class="blue-button">
+                Search
+            </button>
+        </form>
+        <a th:href="@{/employee/insertLogForm(username=${username})}" class="blue-button create-button">Add Log</a>
+        <a th:if="${!hrdApproval and clientApproval}" class="blue-button" th:href="@{/employee/approveAll}">Approve All</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Log Date</th>
+                <th>Client Approval Status</th>
+                <th>Client Approval Date</th>
+                <th>HRD Approval Status</th>
+                <th>HRD Approval Date</th>
+                <th>Client Name</th>
+                <th>HRD Name</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="row : ${grid}" th:object="${row}">
+                <td>
+                    <a th:if="*{!hrdApproval and clientApproval and note != null and activity != null}" class="blue-button" th:href="@{/employee/approve(id=*{id})}">Approve</a>
+                    <a href="javascript:;" class="blue-button detail-button" th:attr="data-id=*{id}">Detail</a>
+                </td>
+                <td th:text="*{logDate}"></td>
+                <td th:text="*{clientApproval ? 'Approved' : 'Pending'}"></td>
+                <td th:text="*{clientApprovalDate}"></td>
+                <td th:text="*{hrdApproval ? 'Approved' : 'Pending'}"></td>
+                <td th:text="*{hrdApprovalDate}"></td>
+                <td th:text="*{clientName}"></td>
+                <td th:text="*{hrdName}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="8">
+                    <div class="pagination">
+                        <div th:text="|Page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages != 0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}" th:href="@{/employee/logList(page=${number}, username=${username}, submissionMonth=${submissionMonth}, submissionYear=${submissionYear}, clientApproval=${clientApproval}, hrdApproval=${hrdApproval})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+<div class="modal-layer">
+    <th:block th:replace="~{/log/log-detail :: detail-dialog}"></th:block>
+</div>
+<script th:src="@{/resources/js/popup/popup.js}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+package com.LogbookApp.dto.logbook;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDate;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class LogDetailDTO {
+    private LocalDate logDate;
+    private String note;
+    private String activity;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+<main>
+    <h1>
+        HRD List
+    </h1>
+    <div class="grid-container">
+        <form class="filter" th:action="@{/hrd/hrdList}" METHOD="get">
+            <input type="text" name="name" th:value="${name}" placeholder="Search Name...">
+            <button type="submit" class="blue-button">
+                Search
+            </button>
+        </form>
+        <a class="blue-button create-button" th:href="@{/account/hrdRegisterForm}">Insert HRD</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Username</th>
+                <th>Name</th>
+                <th>Birth Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row : ${grid}" th:object="${row}">
+                <td>
+                    <a class="blue-button" th:href="@{/account/deleteHRD(username=*{username})}">Delete </a>
+                </td>
+                <td th:text="*{username}"></td>
+                <td th:text="*{name}"></td>
+                <td th:text="*{birthDate}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="4">
+                    <div class="pagination">
+                        <div th:text="|Page ${currentPage} of ${totalPages}|"></div>
+                        <div th:if="${totalPages != 0}">
+                            <a th:each="number : ${#numbers.sequence(1, totalPages)}"
+                               th:text="${number}" th:href="@{/hrd/hrdList(page=${number}, name=${name})}"></a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+</main>
+</body>
+</html>

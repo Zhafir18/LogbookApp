@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="popup-dialog detail-dialog" th:fragment="detail-dialog">
+    <header>
+        <h1>Log Detail</h1>
+        <a href="javascript:;" class="close-button">
+            <i class="fas fa-window-close"></i>
+        </a>
+    </header>
+    <table>
+        <tbody>
+        <tr>
+            <td>
+                Log Date
+            </td>
+            <td class="logDate"></td>
+        </tr>
+        <tr>
+            <td>
+                Note
+            </td>
+            <td class="note"></td>
+        </tr>
+        <tr>
+            <td>
+                <label>Activity</label>
+            </td>
+            <td class="activity"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

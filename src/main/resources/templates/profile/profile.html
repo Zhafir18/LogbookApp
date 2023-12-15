@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="main-body">
+
+<th:block th:replace="~{layout :: template('')}"></th:block>
+<main>
+    <div class="grid-container">
+        <h1>
+            Profile <span th:text="${dto.name}"></span>
+        </h1>
+        <div class="header-info" th:object="${dto}">
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        Username
+                    </td>
+                    <td th:text="*{username}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td th:text="*{name}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Birth Date
+                    </td>
+                    <td th:text="*{birthDate}"></td>
+                </tr>
+                <tr th:unless="*{role == 'Client'}">
+                    <td>
+                        Position
+                    </td>
+                    <td th:text="*{position}"></td>
+                </tr>
+                <tr th:if="*{role == 'Client'}">
+                    <td>
+                        Company
+                    </td>
+                    <td th:text="*{company}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        Role
+                    </td>
+                    <td th:text="*{role}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <a th:href="@{/profile/editForm(username=${#authentication.getPrincipal().getUsername()})}" class="blue-button">Edit</a>
+                        <a th:href="@{/account/changePasswordForm(username=${#authentication.getPrincipal().getUsername()})}" class="blue-button">Change Password</a>
+                    </td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+</body>
+</html>

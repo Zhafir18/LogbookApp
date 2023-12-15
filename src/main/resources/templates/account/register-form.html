@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}"></head>
+<body class="authentication-body">
+<div class="authentication-wrapper">
+    <header th:replace="~{layout :: account-header}"></header>
+    <main>
+        <div class="sign-in">
+            <span>Already have an account?</span>
+            <div>
+                <a class="blue-button register-button" th:href="@{/account/loginForm}">Login</a>
+            </div>
+        </div>
+        <div class="sign-up" id="in">
+            <h1>Register as Employee</h1>
+            <form method="post" th:action="@{/account/register}" th:object="${dto}">
+                <div class="field-validation-error" th:errors="${dto}"></div>
+
+                <input type="text" th:field="*{username}" placeholder="Username">
+                <div class="field-validation-error" th:errors="*{username}"></div>
+
+                <input type="password" th:field="*{password}" placeholder="Password">
+                <div class="field-validation-error" th:errors="*{password}"></div>
+
+                <input type="password" th:field="*{confirmPassword}" placeholder="Confirm Password">
+                <div class="field-validation-error" th:errors="*{confirmPassword}"></div>
+
+                <input type="hidden" th:field="*{role}">
+
+                <input type="text" th:field="*{name}" placeholder="Full Name">
+                <div class="field-validation-error" th:errors="*{name}"></div>
+
+                <button class="sign" type="submit">Register</button>
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>

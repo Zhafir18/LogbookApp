@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Log Book App</title>
+    <link rel="stylesheet" th:href="@{/resources/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/font-awesome.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/site.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/authorization.css}">
+    <script th:src="@{/resources/js/jquery-3.6.0.js}"></script>
+    <script th:src="@{/resources/js/site.js}" defer></script>
+</head>
+<body>
+    <th:block th:fragment="template(breadCrumbs)">
+        <nav>
+            <div class="company-logo">
+                <h1>
+                    <a class="home-button" th:href="@{/}">Log Book App</a>
+                </h1>
+            </div>
+            <a class="menu" th:href="@{/profile/profile}">
+                <i class="fas fa-solid fa-user"></i>
+                <span>Profile</span>
+            </a>
+            <a class="menu" th:href="@{/log/list}" th:if="${#strings.contains(#authentication.getAuthorities, 'Employee')}">
+                <i class="fas fa-solid fa-file-invoice"></i>
+                <span>LogBook</span>
+            </a>
+            <a class="menu" th:href="@{/employee/list}" th:if="${#strings.contains(#authentication.getAuthorities, 'HRD')}">
+                <i class="fas fa-solid fa-users"></i>
+                <span>Employee</span>
+            </a>
+            <a class="menu" th:href="@{/client/employee}" th:if="${#strings.contains(#authentication.getAuthorities, 'Client')}">
+                <i class="fas fa-solid fa-users"></i>
+                <span>Employee</span>
+            </a>
+            <a class="menu" th:href="@{/hrd/clientList}" th:if="${#strings.contains(#authentication.getAuthorities, 'HRD')}">
+                <i class="fas fa-solid fa-users"></i>
+                <span>Client</span>
+            </a>
+            <a class="menu" th:href="@{/hrd/hrdList}" th:if="${#strings.contains(#authentication.getAuthorities, 'HRD')}">
+                <i class="fas fa-solid fa-users"></i>
+                <span>HRD</span>
+            </a>
+            <a class="menu" th:href="@{/notification/list}" th:if="${#strings.contains(#authentication.getAuthorities, 'Employee')}">
+                <i class="fas fa-solid fa-inbox"></i>
+                <span class="notification">Notification </span>
+            </a>
+        </nav>
+
+        <header>
+            <div class="bread-crumbs">
+                <span th:text="${breadCrumbs}"></span>
+            </div>
+            <div class="user-wrapper">
+                <div class="user">
+                    <span class="full-name" th:text="${#authentication.getPrincipal().getUsername()}">anonymous</span>
+                    <span class="role" th:text="${#authentication.getAuthorities()}">guest</span>
+                </div>
+                <div class="sign-out">
+                    <form method="post" th:action="@{/logout}">
+                        <button type="submit">
+                            Sign Out
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </header>
+
+    </th:block>
+
+    <header th:fragment="account-header" class="company-logo">
+        <div>
+            <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-calendar2-check-fill" viewBox="0 0 16 16"> <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5zm-2.6 5.854a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" fill="white"></path> </svg>
+        </div>
+        <div>
+            <h1>
+                Log Book App
+            </h1>
+        </div>
+    </header>
+
+</body>
+</html>
