@@ -324,15 +324,8 @@ textarea {
     color:red;
 }
 .field-validation-error {
-    display: inline-block;
-    box-sizing: border-box;
-    color: white;
-    background: linear-gradient(to right, #f84646, #d52c2f);
-    vertical-align: middle;
-    line-height: 30px;
-    padding: 0 12px;
-    border-radius: 4px;
-    margin-left:5px;
+    text-align: left;
+    color: red;
 }
 textarea + .field-validation-error {
     vertical-align:top;
@@ -412,6 +405,24 @@ input[readonly] {
     grid-area: "sign-in";
     justify-content: center;
     background: #d8dad3;
+}
+
+.authentication-wrapper-failed > main {
+    background-color: #5c5552;
+    padding: 25px;
+    border-radius: 10px;
+    min-width: 350px;
+    text-align: center;
+    box-shadow: 1px 0.5px 15px white;
+}
+
+.authentication-wrapper-failed a {
+    font-size: 15px;
+    text-decoration: none;
+    color: #2eff00;
+    background-color: #030341;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 #in {
