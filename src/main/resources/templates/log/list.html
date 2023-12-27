@@ -17,15 +17,14 @@
                 </option>
             </select>
             <label>Select Month</label>
-            <select name="submissionMonth">
+            <select name="logMonth">
                 <option th:value="null">Select Month....</option>
-                <option th:each="option : ${monthDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == submissionMonth}">
+                <option th:each="option : ${monthDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == logMonth}">
                 </option>
             </select>
             <label>Select Year</label>
-            <select name="submissionYear">
-                <option th:value="null">Select Year....</option>
-                <option th:each="option : ${yearDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == submissionYear}">
+            <select name="logYear">
+                 <option th:each="option : ${yearDropdown}" th:value="${option.value}" th:text="${option.textContent}" th:selected="${option.value == logYear}">
                 </option>
             </select>
             <label>Client Approval</label>
@@ -76,7 +75,7 @@
                     <a th:if="${!hrdApproval and !clientApproval}" class="blue-button" th:href="@{/log/editForm(id=*{id})}">Edit</a>
                     <a href="javascript:;" class="blue-button detail-button" th:attr="data-id=*{id}">Detail</a>
                 </td>
-                <td th:text="*{logDate}"></td>
+                <td th:text="*{dateTimeFormat}"></td>
                 <td th:text="*{clientApproval ? 'Approved' : 'Pending'}"></td>
                 <td th:text="*{hrdApproval ? 'Approved' : 'Pending'}"></td>
             </tr>

@@ -50,7 +50,7 @@
                     <a th:if="*{!clientApproval and note != null and activity != null}" class="blue-button" th:href="@{/client/approve(id=*{id})}">Approve</a>
                     <a href="javascript:;" class="blue-button detail-button" th:attr="data-id=*{id}">Detail</a>
                 </td>
-                <td th:text="*{logDate}"></td>
+                <td th:text="*{dateTimeFormat}"></td>
                 <td th:text="*{clientApproval ? 'Approved' : 'Pending'}"></td>
                 <td th:text="*{clientApprovalDate}"></td>
             </tr>

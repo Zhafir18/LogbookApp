@@ -20,4 +20,15 @@ public class ClientEmployeeLogDTO {
     private LocalDate clientApprovalDate;
     private String note;
     private String activity;
+    private String dateTimeFormat;
+
+    public ClientEmployeeLogDTO(Long id, String username, LocalDate logDate, Boolean clientApproval, LocalDate clientApprovalDate, String note, String activity) {
+        this.id = id;
+        this.username = username;
+        this.logDate = logDate;
+        this.clientApproval = clientApproval;
+        this.clientApprovalDate = clientApprovalDate;
+        this.note = note;
+        this.activity = activity;
+    }
 }

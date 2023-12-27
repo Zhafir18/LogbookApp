@@ -59,16 +59,16 @@ public interface LogRepository extends JpaRepository<LogBook, Long> {
                 JOIN log.clientAccount AS cli
                 JOIN log.hrdAccount AS hrd
             WHERE log.username = :username
-                AND (:submissionMonth IS NULL OR MONTH(log.submissionDate) = :submissionMonth)
-                AND (:submissionYear IS NULL OR YEAR(log.submissionDate) = :submissionYear)
+                AND (:logMonth IS NULL OR MONTH(log.logDate) = :logMonth)
+                AND (:logYear IS NULL OR YEAR(log.logDate) = :logYear)
                 AND (:clientApproval IS NULL OR log.clientApproval = :clientApproval)
                 AND (:hrdApproval IS NULL OR log.hrdApproval = :hrdApproval)
                 AND (:period IS NULL OR log.period = :period)
             """)
 
     public Page<EmployeeLogListDTO> getDataForEmployee(@Param("username") String username,
-                                                       @Param("submissionMonth") Integer submissionMonth,
-                                                       @Param("submissionYear") Integer submissionYear,
+                                                       @Param("logMonth") Integer logMonth,
+                                                       @Param("logYear") Integer logYear,
                                                        @Param("clientApproval") boolean clientApproval,
                                                        @Param("hrdApproval") boolean hrdApproval,
                                                        @Param("period") Integer period,

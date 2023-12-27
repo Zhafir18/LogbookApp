@@ -14,11 +14,6 @@
 <body>
     <th:block th:fragment="template(breadCrumbs)">
         <nav>
-            <div class="company-logo">
-                <h1>
-                    <a class="home-button" th:href="@{/}">Log Book App</a>
-                </h1>
-            </div>
             <a class="menu" th:href="@{/profile/profile}">
                 <i class="fas fa-solid fa-user"></i>
                 <span>Profile</span>
@@ -50,6 +45,11 @@
         </nav>
 
         <header>
+            <div class="company-logo">
+                <h1>
+                    <a class="home-button" th:href="@{/}">Log Book App</a>
+                </h1>
+            </div>
             <div class="bread-crumbs">
                 <span th:text="${breadCrumbs}"></span>
             </div>

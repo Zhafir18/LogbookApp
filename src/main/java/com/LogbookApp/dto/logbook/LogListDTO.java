@@ -24,4 +24,19 @@ public class LogListDTO {
     private String hrdName;
     private String note;
     private String activity;
+    private String dateTimeFormat;
+
+    public LogListDTO(Long id, String username, LocalDate logDate, Boolean clientApproval, LocalDate clientApprovalDate, Boolean hrdApproval, LocalDate hrdApprovalDate, String clientName, String hrdName, String note, String activity) {
+        this.id = id;
+        this.username = username;
+        this.logDate = logDate;
+        this.clientApproval = clientApproval;
+        this.clientApprovalDate = clientApprovalDate;
+        this.hrdApproval = hrdApproval;
+        this.hrdApprovalDate = hrdApprovalDate;
+        this.clientName = clientName;
+        this.hrdName = hrdName;
+        this.note = note;
+        this.activity = activity;
+    }
 }

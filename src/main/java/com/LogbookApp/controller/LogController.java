@@ -22,19 +22,19 @@ public class LogController {
 
     @GetMapping("/list")
     public String index(@RequestParam(defaultValue = "1") Integer page,
-                        @RequestParam(required = false) Integer submissionMonth,
-                        @RequestParam(required = false) Integer submissionYear,
+                        @RequestParam(required = false) Integer logMonth,
+                        @RequestParam(required = false) Integer logYear,
                         @RequestParam(required = false, defaultValue = "true") boolean clientApproval,
                         @RequestParam(required = false, defaultValue = "true") boolean hrdApproval,
                         @RequestParam(required = false) Integer period,
                         Model model){
         var username = SecurityContextHolder.getContext().getAuthentication().getName();
-        var data = logService.getDataForEmployee(username, submissionMonth, submissionYear, clientApproval, hrdApproval, period, page);
+        var data = logService.getDataForEmployee(username, logMonth, logYear, clientApproval, hrdApproval, period, page);
         var header = logService.getHeader(username);
         model.addAttribute("grid", data);
         model.addAttribute("header", header);
-        model.addAttribute("submissionMonth", submissionMonth);
-        model.addAttribute("submissionYear", submissionYear);
+        model.addAttribute("logMonth", logMonth);
+        model.addAttribute("logYear", logYear);
         model.addAttribute("clientApproval", clientApproval);
         model.addAttribute("hrdApproval", hrdApproval);
         model.addAttribute("period", period);

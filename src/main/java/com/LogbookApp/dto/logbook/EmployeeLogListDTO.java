@@ -20,4 +20,15 @@ public class EmployeeLogListDTO {
     private Boolean hrdApproval;
     private String clientName;
     private String hrdName;
+    private String dateTimeFormat;
+
+    public EmployeeLogListDTO(Long id, String username, LocalDate logDate, Boolean clientApproval, Boolean hrdApproval, String clientName, String hrdName) {
+        this.id = id;
+        this.username = username;
+        this.logDate = logDate;
+        this.clientApproval = clientApproval;
+        this.hrdApproval = hrdApproval;
+        this.clientName = clientName;
+        this.hrdName = hrdName;
+    }
 }

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -28,9 +29,15 @@ public class LogService {
     @Autowired
     private NotificationRepository notificationRepository;
 
-    public Page<EmployeeLogListDTO> getDataForEmployee(String username, Integer submissionMonth, Integer submissionYear, boolean clientApproval, boolean hrdApproval, Integer period, Integer page) {
+    public Page<EmployeeLogListDTO> getDataForEmployee(String username, Integer logMonth, Integer logYear, boolean clientApproval, boolean hrdApproval, Integer period, Integer page) {
         var pageable = PageRequest.of(page - 1, 30, Sort.by("logDate"));
-        var data = logRepository.getDataForEmployee(username, submissionMonth, submissionYear, clientApproval, hrdApproval, period, pageable);
+        var data = logRepository.getDataForEmployee(username, logMonth, logYear, clientApproval, hrdApproval, period, pageable);
+        var dateFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+
+        for (var dto : data) {
+            dto.setDateTimeFormat(dateFormat.format(dto.getLogDate()));
+        }
+
         return data;
     }
 
@@ -42,12 +49,24 @@ public class LogService {
     public Page<LogListDTO> getData(String username, Integer submissionMonth, Integer submissionYear, boolean clientApproval, boolean hrdApproval, Integer page) {
         var pageable = PageRequest.of(page - 1, 30, Sort.by("logDate"));
         var data = logRepository.getData(username, submissionMonth, submissionYear, clientApproval, hrdApproval, pageable);
+        var dateFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+
+        for (var dto : data) {
+            dto.setDateTimeFormat(dateFormat.format(dto.getLogDate()));
+        }
+
         return data;
     }
 
     public Page<ClientEmployeeLogDTO> getClientEmployeeLog(String clientUsername, String username, Integer logMonth, Integer logYear, boolean clientApproval, Integer page) {
         var pageable = PageRequest.of(page - 1, 30, Sort.by("logDate"));
         var data = logRepository.getClientEmployeeLog(clientUsername, username, logMonth, logYear, clientApproval, pageable);
+        var dateFormat = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+
+        for (var dto : data) {
+            dto.setDateTimeFormat(dateFormat.format(dto.getLogDate()));
+        }
+
         return data;
     }
 

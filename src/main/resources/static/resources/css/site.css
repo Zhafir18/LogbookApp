@@ -2,6 +2,21 @@
     font-family: 'Poppins';
     src: url("../fonts/Poppins-Regular.ttf") format("truetype");
 }
+
+/* Webkit-based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 5px; /* Set width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #888; /* Set color of the thumb */
+  border-radius: 30px; /* Set border radius of the thumb */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent; /* Set color of the track */
+}
+
 html {
     font-family: "Poppins", "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
     color: white;
@@ -17,7 +32,7 @@ html {
     display: grid;
     grid-template-columns: 180px 1fr;
     grid-template-rows: 70px 1fr 40px;
-    grid-template-areas: "menu top" "menu content" "menu bottom";
+    grid-template-areas: "top top" "menu content" "menu bottom";
     transition: grid-template-columns 0.5s;
 }
 .main-body > nav {
@@ -27,14 +42,17 @@ html {
     position: fixed;
     width: 180px;
     height: -webkit-fill-available;
+    margin-top: 85px;
 }
 .main-body > header {
-    background-color: #1f2833;
+    background-color: white;
     grid-area: top;
     display: flex;
     justify-content:space-between;
     padding: 0 25px;
-    box-shadow: 1px 5px 52px #8888;
+    color: black;
+    position: fixed;
+    width: 98%;
 }
 .bread-crumbs > span,
 .bread-crumbs > span > a {
@@ -59,12 +77,11 @@ html {
     padding: 0 25px;
     line-height: 40px;
 }
-.main-body > nav .company-logo {
+.main-body > header .company-logo {
     display: grid;
     padding: 25px 0 0 25px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     align-items: center;
-    margin-left: 10px;
 }
 .company-logo h1 {
     text-transform: capitalize;
@@ -77,6 +94,7 @@ html {
 .user-wrapper {
     display:flex;
     align-items:center;
+    margin-right: 30px;
 }
 .user-wrapper .user {
     margin-right: 20px;
@@ -85,7 +103,6 @@ html {
     display:block;
 }
 .user .full-name {
-    color: white;
     font-size: 14px;
     font-weight: bold;
     line-height: 24px;
@@ -376,8 +393,7 @@ input[readonly] {
 }
 .home-button {
     text-decoration: none;
-    color: white;
-    text-shadow: 5px 5px 8px white;
+    color: black;
 }
 .authentication-wrapper > main {
     background-color: #5c5552;
