@@ -53,7 +53,9 @@ public interface LogRepository extends JpaRepository<LogBook, Long> {
                 log.clientApproval,
                 log.hrdApproval,
                 cli.name,
-                hrd.name
+                hrd.name,
+                log.activity,
+                log.note
             )
             FROM LogBook AS log
                 JOIN log.clientAccount AS cli

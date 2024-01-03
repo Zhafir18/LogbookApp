@@ -39,6 +39,8 @@
             <tr>
                 <th>Action</th>
                 <th>Log Date</th>
+                <th>Activity</th>
+                <th>Note</th>
                 <th>Client Approval Status</th>
                 <th>Client Approval Date</th>
             </tr>
@@ -51,6 +53,8 @@
                     <a href="javascript:;" class="blue-button detail-button" th:attr="data-id=*{id}">Detail</a>
                 </td>
                 <td th:text="*{dateTimeFormat}"></td>
+                <td th:text="*{activity}"></td>
+                <td th:text="*{note}"></td>
                 <td th:text="*{clientApproval ? 'Approved' : 'Pending'}"></td>
                 <td th:text="*{clientApprovalDate}"></td>
             </tr>

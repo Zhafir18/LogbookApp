@@ -20,9 +20,11 @@ public class EmployeeLogListDTO {
     private Boolean hrdApproval;
     private String clientName;
     private String hrdName;
+    private String activity;
+    private String note;
     private String dateTimeFormat;
 
-    public EmployeeLogListDTO(Long id, String username, LocalDate logDate, Boolean clientApproval, Boolean hrdApproval, String clientName, String hrdName) {
+    public EmployeeLogListDTO(Long id, String username, LocalDate logDate, Boolean clientApproval, Boolean hrdApproval, String clientName, String hrdName, String activity, String note) {
         this.id = id;
         this.username = username;
         this.logDate = logDate;
@@ -30,5 +32,7 @@ public class EmployeeLogListDTO {
         this.hrdApproval = hrdApproval;
         this.clientName = clientName;
         this.hrdName = hrdName;
+        this.activity = activity;
+        this.note = note;
     }
 }
